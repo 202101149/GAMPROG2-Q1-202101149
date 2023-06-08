@@ -21,6 +21,8 @@ public enum ItemType
 public enum EquipmentSlotType
 {
     None,
+    Weapon,
+    Shield,
     // TODO
     // Define other equipment slots here
 }
@@ -41,6 +43,9 @@ public class Attribute
 public enum AttributeType
 {
     HP,
+    DEF,
+    ATK,
+    MANA,
     // TODO
     // Add other attribute types here
 }
