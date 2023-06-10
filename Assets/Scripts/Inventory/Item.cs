@@ -9,10 +9,14 @@ public class Item : Interactable
         // TODO: Add the item to the inventory. Make sure to destroy the prefab once the item is collected
         Debug.Log(id + " is an interactable object");
 
-        //put in inventory
+        //check if inventory slot is available
+        //InventoryManager.Instance.AddItem(id);
+        Debug.Log(InventoryManager.Instance.GetEmptyInventorySlot());
+
+        //if empty slot is available, put in inventory and destroy
 
 
-        //destroy prefab after put in inventory
-        Destroy(gameObject);
+        //else return debug inventory full
+        //Destroy(gameObject);
     }
 }
