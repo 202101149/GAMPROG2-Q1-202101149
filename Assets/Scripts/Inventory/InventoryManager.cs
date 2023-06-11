@@ -57,6 +57,18 @@ public class InventoryManager : MonoBehaviour
         // If the item is a consumable, simply add the attributes of the item to the player.
         // If it is equippable, get the equipment slot that matches the item's slot.
         // Set the equipment slot's item as that of the used item
+
+        //consumable
+        if(data.type == ItemType.Consumable)
+        {
+            player.AddAttributes(data.attributes);
+        }
+
+        if(data.type == ItemType.Equipabble)
+        {
+            equipmentSlots[GetEquipmentSlot(data.slotType)].SetItem(data);
+            player.AddAttributes(data.attributes);
+        }
     }
 
    
@@ -64,15 +76,17 @@ public class InventoryManager : MonoBehaviour
     {
         //TODO
         //1. Cycle through every item in the database until you find the item with the same id.
-        //for(int x = 0; x <)
-        //{
-
-        //}
         //2. Get the index of the InventorySlot that does not have any Item and set its Item to the Item found
-        //if(inventorySlots[GetEmptyInventorySlot()] != )
-        //{
-
-        //}
+        int idbArray = -1;
+        for (int x = 0; x < itemDatabase.Count; x++)
+        {
+            if (itemDatabase[x].id == itemID)
+            {
+                idbArray = x;
+                break;
+            }
+        }
+        inventorySlots[GetEmptyInventorySlot()].SetItem(itemDatabase[idbArray]);
     }
 
     public int GetEmptyInventorySlot()
@@ -82,13 +96,13 @@ public class InventoryManager : MonoBehaviour
         int slot = -1;
         for (int x = 0; x < inventorySlots.Count; x++)
         {
-            Debug.Log(x);
-            if (inventorySlots[x].HasItem())
+            if (!inventorySlots[x].HasItem())
             {
                 slot = x;
                 break;
             }
         }
+        Debug.Log(slot + 1 + " in the inventory");
         return slot;
     }
 
@@ -96,6 +110,18 @@ public class InventoryManager : MonoBehaviour
     {
         //TODO
         //Check which equipment slot matches the slot type and return its index
-        return -1;
+        int eSlot = -1;
+        for (int x = 0; x < equipmentSlots.Count; x++)
+        {
+            if (equipmentSlots[x].type == type)
+            {
+                if (!equipmentSlots[x].HasItem())
+                {
+                    eSlot = x;
+                    break;
+                }
+            }
+        }
+        return eSlot;
     }
 }
