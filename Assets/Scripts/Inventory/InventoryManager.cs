@@ -124,4 +124,22 @@ public class InventoryManager : MonoBehaviour
         }
         return eSlot;
     }
+
+    public int GetKeySlot()
+    {
+        int slot = -1;
+        for (int x = 0; x < inventorySlots.Count; x++)
+        {
+            if (inventorySlots[x].getId() == "Key")
+            {
+                slot = x;
+                break;
+            }
+        }
+        if(slot != -1)
+        {
+            inventorySlots[slot].UseItem();
+        }
+        return slot;
+    }
 }

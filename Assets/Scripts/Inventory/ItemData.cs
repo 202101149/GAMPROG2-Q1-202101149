@@ -16,6 +16,7 @@ public enum ItemType
 {
     Consumable,
     Equipabble, 
+    StoryItems, 
 }
 
 public enum EquipmentSlotType

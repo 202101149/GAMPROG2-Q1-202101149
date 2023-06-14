@@ -40,7 +40,14 @@ public class RaycastController : MonoBehaviour
         {
             if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                interactionInfo.text = hit.collider.gameObject.name;
+                if(hit.collider.gameObject.tag == "Door")
+                {
+                    interactionInfo.text = hit.collider.gameObject.name; 
+                }
+                else
+                {
+                    interactionInfo.text = hit.collider.gameObject.GetComponent<Item>().id;
+                }
             }
             else
             {
@@ -59,7 +66,21 @@ public class RaycastController : MonoBehaviour
         {
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                hit.collider.gameObject.GetComponent<Item>().Interact();
+                if(hit.collider.gameObject.tag == "Door")
+                {
+                    if(InventoryManager.Instance.GetKeySlot() != -1)
+                    {
+                        Destroy(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        Debug.Log("you are missing a key");
+                    }
+                }
+                else
+                {
+                    hit.collider.gameObject.GetComponent<Item>().Interact();
+                }
             }
             else
             {

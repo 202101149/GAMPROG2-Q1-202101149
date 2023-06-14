@@ -38,6 +38,25 @@ public class InventorySlot : MonoBehaviour
             itemIcon.enabled = false;
             itemData = null;
         }
+        if (itemData.type == ItemType.StoryItems)
+        {
+            itemIcon.sprite = null;
+            itemIcon.enabled = false;
+            itemData = null;
+        }
+    }
+
+    public string getId()
+    {
+        if (itemData == null)
+        {
+            return null;
+        }
+        else
+        {
+            return itemData.id;
+        }
+        
     }
 
     public bool HasItem()
